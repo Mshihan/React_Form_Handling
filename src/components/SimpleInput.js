@@ -2,33 +2,24 @@ import React, { useState } from "react";
 
 const SimpleInput = (props) => {
   const [enteredName, setName] = useState("");
-  const [enteredValid, setEnteredValid] = useState(false);
   const [nameInputTouched, setnameInputTouched] = useState(false);
+
+  const enteredValid = enteredName.trim() !== "";
 
   const nameInputBlurHandler = (event) => {
     setnameInputTouched(true);
-    if (enteredName.trim() === "") {
-      setEnteredValid(false);
-      return;
-    }
   };
 
   const nameInputHandler = (event) => {
     setName(event.target.value);
-    if (enteredName.trim() !== "") {
-      setEnteredValid(true);
-      return;
-    }
   };
 
   const formSubmissionHandler = (event) => {
     event.preventDefault();
     setnameInputTouched(true);
-    if (enteredName === "") {
-      setEnteredValid(false);
+    if (!enteredValid) {
       return;
     }
-    setEnteredValid(true);
     console.log(enteredName);
     setName("");
     setnameInputTouched(false);
